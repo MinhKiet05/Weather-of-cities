@@ -1,12 +1,93 @@
-# React + Vite
+# 🌤 Weather App (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ứng dụng thời tiết đơn giản được xây dựng bằng **React + Vite**, sử dụng **OpenWeatherMap API** để lấy dữ liệu thời tiết theo tên thành phố.  
+Ngoài ra còn có hiệu ứng chữ **ShinyText** hiển thị trạng thái thời tiết.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Công nghệ sử dụng
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [OpenWeatherMap API](https://openweathermap.org/api)
+- [Font Awesome](https://fontawesome.com/) (icon tìm kiếm)
+- [jQuery](https://jquery.com/) (xử lý sự kiện input)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ⚡ Tính năng
+- Nhập tên thành phố để xem:
+  - Nhiệt độ hiện tại (°C)
+  - Mô tả trạng thái thời tiết (có hiệu ứng shiny text ✨)
+  - Thời gian mặt trời mọc / lặn
+  - Tốc độ gió
+  - Độ ẩm
+  - Icon minh họa thời tiết
+- Giao diện tối giản, responsive, bo tròn thẻ hiển thị.
+
+---
+
+## 📂 Cấu trúc thư mục
+
+src/
+│── App.jsx # Component chính
+│── App.css # CSS chung
+│── assets/
+│ └── reactBits/
+│ └── ShinyText.jsx # Component hiệu ứng shiny text
+│── main.jsx # Entry point Vite
+
+---
+
+## 🔑 Cấu hình API
+Ứng dụng sử dụng API key từ [OpenWeatherMap](https://openweathermap.org/api).  
+Trong `App.jsx` bạn cần thay:
+
+const APP_ID = "YOUR_API_KEY_HERE";
+
+
+🛠 Cài đặt & Chạy dự án
+# Cài dependencies
+npm install
+
+# Chạy ở chế độ dev (có HMR)
+npm run dev
+
+# Build production
+npm run build
+
+# Preview bản build
+npm run preview
+
+
+Hiệu ứng ShinyText
+
+Hiệu ứng shine được định nghĩa trong App.css:
+
+.animate-shine {
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+
+Và được áp dụng trong ShinyText.jsx để hiển thị trạng thái thời tiết:
+
+<ShinyText
+  text="Trời nhiều mây"
+  disabled={false}
+  speed={3}
+  className="weather-state"
+/>
+
+📸 Demo giao diện
+
+
+![alt text](image.png)
+
+📜 Giấy phép
+
+Dự án chỉ dùng cho mục đích học tập.
+Bạn có thể thoải mái chỉnh sửa và mở rộng thêm tính năng. 🚀
