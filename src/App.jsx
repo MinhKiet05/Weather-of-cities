@@ -1,9 +1,12 @@
-//import { useState } from 'react'
+
 import './App.css'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useEffect } from 'react';
 import $ from 'jquery';
-//3539
+import ShinyText from './assets/reactBits/ShinyText.jsx';
+import GradientText from './assets/reactBits/GradientText.jsx';
+import TextTrail from './assets/reactBits/TextTrail.jsx';
+
 function App() {
   const APP_ID = "01556dfe95b1b47ede86db3c42bf4ec8";
   useEffect(() => {
@@ -38,11 +41,19 @@ function App() {
         <div className="main-section">
           <div className="search-bar">
             <input type="text" name='search-city' id='search-input' />
-            <i className="fa-solid fa-magnifying-glass search-icon"></i>  
+            <i className="fa-solid fa-magnifying-glass search-icon"></i>
           </div>
-          <p className='city-name'>Thành phố</p>
-          <p className='weather-state'>trạng thái</p>
-          <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" className='weather-icon'/>
+          
+            <GradientText ><p className='city-name'>Thành phố</p></GradientText>
+          
+          
+          <ShinyText
+            text="trạng thái"
+            disabled={false}
+            speed={3}
+            className='weather-state'
+          />
+          <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" className='weather-icon' />
           <p className="weather-temperature">°C</p>
         </div>
         <div className="additional-section">

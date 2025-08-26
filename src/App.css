@@ -37,6 +37,7 @@ body {
   color: #74ebd5;
   font-size: 1.2rem;
   pointer-events: none;
+  transition: transform 200ms ease, color 200ms ease;
 }
 
 .search-bar i {
@@ -62,13 +63,13 @@ body {
   font-size: 1.4rem;
   font-weight: 600;
   margin: 8px 0 4px 0;
-  color: #333;
 }
 
 .weather-state {
   font-size: 1rem;
   color: #666;
   margin-bottom: 8px;
+  position: relative;
 }
 
 .weather-temperature {
@@ -129,4 +130,49 @@ body {
     width: 60px;
     height: 60px;
   }
+}
+.animate-shine {
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shiny-text.disabled {
+  animation: none;
+}
+
+/* Utilities used by GradientText (for projects without Tailwind) */
+.text-transparent { color: transparent; }
+.inline-block { display: inline-block; }
+.relative { position: relative; }
+.z-2 { z-index: 2; }
+.bg-cover { background-repeat: no-repeat; background-size: cover; }
+
+.animate-gradient {
+  animation: gradient 3s linear infinite;
+  background-size: 300% 100%;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* End GradientText helpers */
+i:hover{
+  transform: scale(1.1);
+}
+
+/* Enlarge icon on hover (hovering the search bar or the icon) */
+.search-bar:hover .search-icon,
+.search-icon:hover {
+  transform: translateY(-50%) scale(1.25);
+  color: #4acfc0;
 }
