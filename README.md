@@ -29,11 +29,17 @@ Ngoài ra còn có hiệu ứng chữ **ShinyText** hiển thị trạng thái t
 ## 📂 Cấu trúc thư mục
 
 src/
+
 │── App.jsx # Component chính
+
 │── App.css # CSS chung
+
 │── assets/
+
 │ └── reactBits/
+
 │ └── ShinyText.jsx # Component hiệu ứng shiny text
+
 │── main.jsx # Entry point Vite
 
 ---
@@ -43,7 +49,6 @@ src/
 Trong `App.jsx` bạn cần thay:
 
 const APP_ID = "YOUR_API_KEY_HERE";
-
 
 🛠 Cài đặt & Chạy dự án
 # Cài dependencies
@@ -82,12 +87,12 @@ Và được áp dụng trong ShinyText.jsx để hiển thị trạng thái th�
   className="weather-state"
 />
 
-📸 Demo giao diện
+##📸 Demo giao diện
 
 
 ![alt text](image.png)
 
-📜 Giấy phép
+##📜 Giấy phép
 
 Dự án chỉ dùng cho mục đích học tập.
 Bạn có thể thoải mái chỉnh sửa và mở rộng thêm tính năng. 🚀
