@@ -87,7 +87,7 @@ Và được áp dụng trong ShinyText.jsx để hiển thị trạng thái th�
   className="weather-state"
 />
 
-##📸 Demo giao diện
+📸 Demo giao diện
 
 
 ![alt text](image.png)
