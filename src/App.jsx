@@ -40,30 +40,30 @@ function App() {
             <input type="text" name='search-city' id='search-input' />
             <i className="fa-solid fa-magnifying-glass search-icon"></i>  
           </div>
-          <p className='city-name'>Ho Chi Minh</p>
-          <p className='weather-state'>May thua</p>
+          <p className='city-name'>Thành phố</p>
+          <p className='weather-state'>trạng thái</p>
           <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" className='weather-icon'/>
-          <p className="weather-temperature">25°C</p>
+          <p className="weather-temperature">°C</p>
         </div>
         <div className="additional-section">
           <div className="row">
             <div className="item">
               <div className="label">Mặt trời mọc</div>
-              <div className="value sunrise">6:14</div>
+              <div className="value sunrise">00:00:00 AM</div>
             </div>
             <div className="item">
               <div className="label">Mặt trời lặn</div>
-              <div className="value sunset">18:30</div>
+              <div className="value sunset">00:00:00 AM</div>
             </div>
           </div>
           <div className="row">
             <div className="item">
               <div className="label">Gió</div>
-              <div className="value wind">10 km/h</div>
+              <div className="value wind">0 km/h</div>
             </div>
             <div className="item">
               <div className="label">Độ ẩm</div>
-              <div className="value humidity">80%</div>
+              <div className="value humidity">0%</div>
             </div>
           </div>
         </div>
