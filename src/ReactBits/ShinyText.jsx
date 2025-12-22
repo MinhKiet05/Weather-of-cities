@@ -5,7 +5,7 @@ const ShinyText = ({ text, disabled = false, speed = 5, className = '' }) => {
     <div
       className={`${disabled ? '' : 'animate-shine'} ${className}`}
       style={{
-        backgroundImage: 'linear-gradient(120deg, #666 0%, #666 40%, #74ebd5 50%, #666 60%, #666 100%)',
+        backgroundImage: 'linear-gradient(120deg, #2d3436 0%, #373737ff 40%, #74ebd5 50%, #373737ff 60%, #2d3436 100%)',
         backgroundSize: '200% 100%',
         WebkitBackgroundClip: 'text',
         backgroundClip: 'text',

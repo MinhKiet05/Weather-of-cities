@@ -1,9 +1,9 @@
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
-  min-height: 100vh;
+  background: url("./assets/bg.png") no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
   margin: 0;
-  padding: 0;
 }
 
 .container {
@@ -11,79 +11,70 @@ body {
   margin: 40px auto;
   background: #fff;
   border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
   padding: 32px 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
 }
 
 .main-section {
   text-align: center;
-  margin-bottom: 32px;
 }
 
 .search-bar {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 18px;
-}
-
-.search-icon {
-  position: absolute;
-  right: 18px;
-  left: auto;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #74ebd5;
-  font-size: 1.2rem;
-  pointer-events: none;
-  transition: transform 200ms ease, color 200ms ease;
-}
-
-.search-bar i {
-  font-size: 1.2rem;
-  color: #74ebd5;
+  width: 100%;
+  margin-bottom: 16px;
 }
 
 #search-input {
-  padding: 8px 38px 8px 14px;
+  width: calc(100% - 42px - 14px);
+  padding: 10px 42px 10px 14px;
   border: 1px solid #ACB6E5;
   border-radius: 8px;
-  outline: none;
   font-size: 1rem;
-  width: 60%;
-  transition: border-color 0.2s;
+  outline: none;
 }
 
 #search-input:focus {
   border-color: #74ebd5;
 }
 
+.search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #74ebd5;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.search-icon:hover {
+  color: #4fc3b7;
+  transform: translateY(-50%) scale(1.1);
+}
+
 .city-name {
   font-size: 1.4rem;
   font-weight: 600;
-  margin: 8px 0 4px 0;
 }
 
 .weather-state {
   font-size: 1rem;
   color: #666;
-  margin-bottom: 8px;
-  position: relative;
+}
+
+.weather-icon {
+  width: 80px;
+  height: 80px;
+  margin: 8px auto;
+  display: block;
 }
 
 .weather-temperature {
   font-size: 2.2rem;
   font-weight: bold;
-  color: #74ebd5;
-  margin: 10px 0 0 0;
-}
-
-.main-section img {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 8px auto;
-  display: block;
+  color: #2d3436;
 }
 
 .additional-section {
@@ -92,87 +83,81 @@ body {
 
 .row {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 12px;
+  gap: 4px;
 }
 
 .item {
   background: #f7f9fa;
   border-radius: 10px;
-  padding: 12px 18px;
-  min-width: 120px;
-  box-shadow: 0 2px 8px rgba(172,182,229,0.08);
+  padding: 12px;
+  width: 48%;
   text-align: center;
+  border: #636e72 0.1px solid;
 }
 
 .label {
-  font-size: 0.95rem;
-  color: #888;
-  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: #636e72;
 }
 
 .value {
   font-size: 1.1rem;
   font-weight: 500;
-  color: #333;
 }
 
-@media (max-width: 500px) {
-  .container {
-    max-width: 98vw;
-    padding: 18px 6px;
-  }
-  .item {
-    min-width: 90px;
-    padding: 10px 8px;
-  }
-  .main-section img {
-    width: 60px;
-    height: 60px;
-  }
-}
-.animate-shine {
-  animation: shine 3s linear infinite;
-}
-
+/* Animation cho ShinyText */
 @keyframes shine {
-  0% {
-    background-position: -200% 0;
+  0% { 
+    background-position: 100%; 
   }
-  100% {
-    background-position: 200% 0;
+  100% { 
+    background-position: -100%; 
   }
 }
 
-.shiny-text.disabled {
-  animation: none;
-}
-
-/* Utilities used by GradientText (for projects without Tailwind) */
-.text-transparent { color: transparent; }
-.inline-block { display: inline-block; }
-.relative { position: relative; }
-.z-2 { z-index: 2; }
-.bg-cover { background-repeat: no-repeat; background-size: cover; }
-
-.animate-gradient {
-  animation: gradient 3s linear infinite;
-  background-size: 300% 100%;
+.animate-shine {
+  animation: shine linear infinite;
 }
 
 @keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-/* End GradientText helpers */
-i:hover{
-  transform: scale(1.1);
+  0% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+  100% { 
+    background-position: 0% 50%; 
+  }
 }
 
-/* Enlarge icon on hover (hovering the search bar or the icon) */
-.search-bar:hover .search-icon,
-.search-icon:hover {
-  transform: translateY(-50%) scale(1.25);
-  color: #4acfc0;
+.animate-gradient {
+  animation: gradient linear infinite;
 }
+
+.relative { position: relative; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.flex { display: flex; }
+.max-w-fit { max-width: fit-content; }
+.flex-row { flex-direction: row; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.rounded-lg { border-radius: 1.25rem; }
+.font-medium { font-weight: 500; }
+.backdrop-blur { backdrop-filter: blur(8px); }
+.transition-shadow { transition: box-shadow 0.15s ease-in-out; }
+.duration-500 { transition-duration: 500ms; }
+.overflow-hidden { overflow: hidden; }
+.cursor-pointer { cursor: pointer; }
+.absolute { position: absolute; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.bg-cover { background-size: cover; }
+.z-0 { z-index: 0; }
+.pointer-events-none { pointer-events: none; }
+.bg-black { background-color: black; }
+.z-[-1] { z-index: -1; }
+.inline-block { display: inline-block; }
+.z-2 { z-index: 2; }
+.text-transparent { color: transparent; }

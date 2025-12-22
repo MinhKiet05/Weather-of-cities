@@ -3,35 +3,59 @@ import './App.css'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useEffect } from 'react';
 import $ from 'jquery';
-import ShinyText from './assets/reactBits/ShinyText.jsx';
-import GradientText from './assets/reactBits/GradientText.jsx';
-import TextTrail from './assets/reactBits/TextTrail.jsx';
+import ShinyText from './ReactBits/ShinyText.jsx';
+import GradientText from './ReactBits/GradientText.jsx';
+import TextTrail from './ReactBits/TextTrail.jsx';
 
 function App() {
+  function removeVietnameseTones(str) {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "d")
+      .replace(/Đ/g, "D");
+  }
+  
   const APP_ID = import.meta.env.VITE_OPENWEATHER_API_KEY;
+  
+  const searchWeather = (cityName) => {
+    const processedCityName = removeVietnameseTones(cityName.trim());
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${processedCityName}&appid=${APP_ID}&units=metric&lang=vi`)
+      .then(async res => {
+        const data = await res.json();
+
+        if (data.cod === 200) {
+          const { name, main, weather } = data;
+          $('.city-name').text(name);
+          $('.weather-state').text(weather[0].description);
+          $('.weather-temperature').text(`${main.temp.toFixed(1)}°C`);
+          $('.sunrise').text(new Date(data.sys.sunrise * 1000).toLocaleTimeString());
+          $('.sunset').text(new Date(data.sys.sunset * 1000).toLocaleTimeString());
+          $('.wind').text(`${data.wind.speed} km/h`);
+          $('.humidity').text(`${main.humidity}%`);
+          $('.weather-icon').attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+        } else {
+          alert('City not found');
+        }
+      });
+  };
+
   useEffect(() => {
+    $('#search-input').keypress(function (e) {
+      if (e.which === 13) { 
+        e.preventDefault();
+        const cityName = e.target.value;
+        if (cityName.trim()) {
+          searchWeather(cityName);
+        }
+      }
+    });
 
-    $('#search-input').change(function (e) {
-      e.preventDefault();
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${e.target.value}&appid=${APP_ID}&units=metric&lang=vi`)
-        .then(async res => {
-          const data = await res.json();
-
-          if (data.cod === 200) {
-            const { name, main, weather } = data;
-            $('.city-name').text(name);
-            $('.weather-state').text(weather[0].description);
-            $('.weather-temperature').text(`${main.temp.toFixed(1)}°C`);
-            $('.sunrise').text(new Date(data.sys.sunrise * 1000).toLocaleTimeString());
-            $('.sunset').text(new Date(data.sys.sunset * 1000).toLocaleTimeString());
-            $('.wind').text(`${data.wind.speed} km/h`);
-            $('.humidity').text(`${main.humidity}%`);
-            $('.weather-icon').attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
-          } else {
-            alert('City not found');
-          }
-
-        })
+    $('.search-icon').click(function () {
+      const cityName = $('#search-input').val();
+      if (cityName.trim()) {
+        searchWeather(cityName);
+      }
     });
   }, []);
 
