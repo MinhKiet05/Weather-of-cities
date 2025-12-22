@@ -5,10 +5,9 @@ import { useEffect } from 'react';
 import $ from 'jquery';
 import ShinyText from './ReactBits/ShinyText.jsx';
 import GradientText from './ReactBits/GradientText.jsx';
-import TextTrail from './ReactBits/TextTrail.jsx';
 
 function App() {
-  function removeVietnameseTones(str) {
+  function boDauChoThanhPho(str) {
     return str
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
@@ -19,8 +18,7 @@ function App() {
   const APP_ID = import.meta.env.VITE_OPENWEATHER_API_KEY;
   
   const searchWeather = (cityName) => {
-    const processedCityName = removeVietnameseTones(cityName.trim());
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${processedCityName}&appid=${APP_ID}&units=metric&lang=vi`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${boDauChoThanhPho(cityName.trim())}&appid=${APP_ID}&units=metric&lang=vi`)
       .then(async res => {
         const data = await res.json();
 
