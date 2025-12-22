@@ -8,7 +8,7 @@ import GradientText from './assets/reactBits/GradientText.jsx';
 import TextTrail from './assets/reactBits/TextTrail.jsx';
 
 function App() {
-  const APP_ID = "01556dfe95b1b47ede86db3c42bf4ec8";
+  const APP_ID = import.meta.env.VITE_OPENWEATHER_API_KEY;
   useEffect(() => {
 
     $('#search-input').change(function (e) {
