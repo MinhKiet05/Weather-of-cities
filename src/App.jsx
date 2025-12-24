@@ -77,11 +77,8 @@ function App() {
         },
         (error) => {
           console.warn("Lỗi lấy vị trí hoặc người dùng từ chối:", error);
-          searchWeather('Ho Chi Minh'); 
         }
       );
-    } else {
-      searchWeather('Ho Chi Minh');
     }
 
   }, []);
@@ -95,7 +92,7 @@ function App() {
             <i className="fa-solid fa-magnifying-glass search-icon"></i>
           </div>
           
-            <GradientText ><p className='city-name'>Đang tải vị trí...</p></GradientText>
+            <GradientText ><p className='city-name'>Tên thành Phố</p></GradientText>
           
           <ShinyText
             text="trạng thái"
