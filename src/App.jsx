@@ -1,4 +1,3 @@
-
 import './App.css'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useEffect } from 'react';
@@ -17,26 +16,39 @@ function App() {
   
   const APP_ID = import.meta.env.VITE_OPENWEATHER_API_KEY;
   
+  const updateUI = (data) => {
+    const { name, main, weather } = data;
+    $('.city-name').text(name);
+    $('.weather-state').text(weather[0].description);
+    $('.weather-temperature').text(`${main.temp.toFixed(1)}°C`);
+    $('.sunrise').text(new Date(data.sys.sunrise * 1000).toLocaleTimeString());
+    $('.sunset').text(new Date(data.sys.sunset * 1000).toLocaleTimeString());
+    $('.wind').text(`${data.wind.speed} km/h`);
+    $('.humidity').text(`${main.humidity}%`);
+    $('.weather-icon').attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+  };
+
   const searchWeather = (cityName) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${boDauChoThanhPho(cityName.trim())}&appid=${APP_ID}&units=metric&lang=vi`)
       .then(async res => {
         const data = await res.json();
-
         if (data.cod === 200) {
-          const { name, main, weather } = data;
-          $('.city-name').text(name);
-          $('.weather-state').text(weather[0].description);
-          $('.weather-temperature').text(`${main.temp.toFixed(1)}°C`);
-          $('.sunrise').text(new Date(data.sys.sunrise * 1000).toLocaleTimeString());
-          $('.sunset').text(new Date(data.sys.sunset * 1000).toLocaleTimeString());
-          $('.wind').text(`${data.wind.speed} km/h`);
-          $('.humidity').text(`${main.humidity}%`);
-          $('.weather-icon').attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+          updateUI(data);
         } else {
-          alert('City not found');
+          alert('Không tìm thấy thành phố');
         }
       });
   };
+
+  const searchWeatherByCoord = (lat, lon) => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APP_ID}&units=metric&lang=vi`)
+      .then(async res => {
+        const data = await res.json();
+        if (data.cod === 200) {
+          updateUI(data);
+        }
+      });
+  }
 
   useEffect(() => {
     $('#search-input').keypress(function (e) {
@@ -55,6 +67,23 @@ function App() {
         searchWeather(cityName);
       }
     });
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          searchWeatherByCoord(lat, lon);
+        },
+        (error) => {
+          console.warn("Lỗi lấy vị trí hoặc người dùng từ chối:", error);
+          searchWeather('Ho Chi Minh'); 
+        }
+      );
+    } else {
+      searchWeather('Ho Chi Minh');
+    }
+
   }, []);
 
   return (
@@ -62,12 +91,11 @@ function App() {
       <div className="container">
         <div className="main-section">
           <div className="search-bar">
-            <input type="text" name='search-city' id='search-input' />
+            <input type="text" name='search-city' id='search-input' placeholder="Nhập tên thành phố..." />
             <i className="fa-solid fa-magnifying-glass search-icon"></i>
           </div>
           
-            <GradientText ><p className='city-name'>Thành phố</p></GradientText>
-          
+            <GradientText ><p className='city-name'>Đang tải vị trí...</p></GradientText>
           
           <ShinyText
             text="trạng thái"
@@ -76,27 +104,27 @@ function App() {
             className='weather-state'
           />
           <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" className='weather-icon' />
-          <p className="weather-temperature">°C</p>
+          <p className="weather-temperature">--°C</p>
         </div>
         <div className="additional-section">
           <div className="row">
             <div className="item">
               <div className="label">Mặt trời mọc</div>
-              <div className="value sunrise">00:00:00 AM</div>
+              <div className="value sunrise">--:--:--</div>
             </div>
             <div className="item">
               <div className="label">Mặt trời lặn</div>
-              <div className="value sunset">00:00:00 AM</div>
+              <div className="value sunset">--:--:--</div>
             </div>
           </div>
           <div className="row">
             <div className="item">
               <div className="label">Gió</div>
-              <div className="value wind">0 km/h</div>
+              <div className="value wind">-- km/h</div>
             </div>
             <div className="item">
               <div className="label">Độ ẩm</div>
-              <div className="value humidity">0%</div>
+              <div className="value humidity">--%</div>
             </div>
           </div>
         </div>
